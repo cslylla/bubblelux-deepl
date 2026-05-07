@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BubbleLux — Luxury Bath Bombs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo" id="nav-logo">BubbleLux</a>
+    <div class="lang-switcher" id="lang-switcher" aria-label="Language switcher">
+      <select class="lang-select" id="lang-select" aria-label="Select language">
+        <option value="en" id="lang-en" selected>EN</option>
+        <option value="de" id="lang-de" disabled class="lang-option-inactive">DE</option>
+        <option value="fr" id="lang-fr" disabled class="lang-option-inactive">FR</option>
+        <option value="it" id="lang-it" disabled class="lang-option-inactive">IT</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <h1 class="hero-tagline" id="hero-tagline">The purest luxury, dissolved into a moment of bliss.</h1>
+      <p class="hero-body" id="hero-body">BubbleLux was born from a simple belief — that the most ordinary moments deserve extraordinary care. Each bath bomb is handcrafted with pure botanical ingredients, designed to turn your bath into a ritual.</p>
+    </div>
+  </section>
+
+  <!-- PRODUCT GRID -->
+  <main class="shop" id="shop">
+    <div class="product-grid">
+
+      <!-- Card 1: Rose & Vanilla Dream -->
+      <article class="card" id="card-rose-vanilla">
+        <div class="card-image-wrap">
+          <img src="assets/products/rose-vanilla.png" alt="Rose &amp; Vanilla Dream bath bomb" width="280" height="280" class="card-image" />
+        </div>
+        <div class="card-body">
+          <h2 class="card-title" id="card-rose-vanilla-title">Rose &amp; Vanilla Dream</h2>
+          <p class="card-desc" id="card-rose-vanilla-desc">Wrap yourself in a silken veil of delicate florals and sweet, grounding tranquility.</p>
+          <p class="card-price" id="card-rose-vanilla-price">CHF 12.90</p>
+          <div class="card-qty">
+            <label class="qty-label" for="qty-rose-vanilla" id="card-rose-vanilla-qty-label">Qty</label>
+            <select class="qty-select" id="qty-rose-vanilla" aria-label="Quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <ul class="card-perks">
+            <li id="card-rose-vanilla-perk-returns">&#10003; Free returns within 30 days</li>
+            <li id="card-rose-vanilla-perk-natural">&#10003; 100% natural ingredients</li>
+          </ul>
+          <div class="card-actions">
+            <button class="btn btn-cart" id="card-rose-vanilla-btn-cart">Add to Cart</button>
+            <button class="btn btn-info" id="card-rose-vanilla-btn-info">More Info</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Midnight Lavender -->
+      <article class="card" id="card-midnight-lavender">
+        <div class="card-image-wrap">
+          <img src="assets/products/midnight-lavender.png" alt="Midnight Lavender bath bomb" width="280" height="280" class="card-image" />
+        </div>
+        <div class="card-body">
+          <h2 class="card-title" id="card-midnight-lavender-title">Midnight Lavender</h2>
+          <p class="card-desc" id="card-midnight-lavender-desc">Let the day drift away in a calming tide of deep purple blooms and quiet rest.</p>
+          <p class="card-price" id="card-midnight-lavender-price">CHF 11.50</p>
+          <div class="card-qty">
+            <label class="qty-label" for="qty-midnight-lavender" id="card-midnight-lavender-qty-label">Qty</label>
+            <select class="qty-select" id="qty-midnight-lavender" aria-label="Quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <ul class="card-perks">
+            <li id="card-midnight-lavender-perk-returns">&#10003; Free returns within 30 days</li>
+            <li id="card-midnight-lavender-perk-natural">&#10003; 100% natural ingredients</li>
+          </ul>
+          <div class="card-actions">
+            <button class="btn btn-cart" id="card-midnight-lavender-btn-cart">Add to Cart</button>
+            <button class="btn btn-info" id="card-midnight-lavender-btn-info">More Info</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Citrus Burst -->
+      <article class="card" id="card-citrus-burst">
+        <div class="card-image-wrap">
+          <img src="assets/products/citrus-burst.png" alt="Citrus Burst bath bomb" width="280" height="280" class="card-image" />
+        </div>
+        <div class="card-body">
+          <h2 class="card-title" id="card-citrus-burst-title">Citrus Burst</h2>
+          <p class="card-desc" id="card-citrus-burst-desc">Effervescent notes of sun-ripened fruit that dance across the water to energize your day.</p>
+          <p class="card-price" id="card-citrus-burst-price">CHF 10.90</p>
+          <div class="card-qty">
+            <label class="qty-label" for="qty-citrus-burst" id="card-citrus-burst-qty-label">Qty</label>
+            <select class="qty-select" id="qty-citrus-burst" aria-label="Quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <ul class="card-perks">
+            <li id="card-citrus-burst-perk-returns">&#10003; Free returns within 30 days</li>
+            <li id="card-citrus-burst-perk-natural">&#10003; 100% natural ingredients</li>
+          </ul>
+          <div class="card-actions">
+            <button class="btn btn-cart" id="card-citrus-burst-btn-cart">Add to Cart</button>
+            <button class="btn btn-info" id="card-citrus-burst-btn-info">More Info</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <p id="footer-copy">&copy; 2026 BubbleLux. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
