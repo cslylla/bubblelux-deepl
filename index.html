@@ -17,7 +17,7 @@
     <div class="lang-switcher" id="lang-switcher" aria-label="Language switcher">
       <select class="lang-select" id="lang-select" aria-label="Select language">
         <option value="en" id="lang-en" selected>EN</option>
-        <option value="de" id="lang-de" disabled class="lang-option-inactive">DE</option>
+        <option value="de" id="lang-de">DE</option>
         <option value="fr" id="lang-fr" disabled class="lang-option-inactive">FR</option>
         <option value="it" id="lang-it" disabled class="lang-option-inactive">IT</option>
       </select>
@@ -127,6 +127,41 @@
   <footer class="footer" id="footer">
     <p id="footer-copy">&copy; 2026 BubbleLux. All rights reserved.</p>
   </footer>
+
+  <script>
+    function attachSwitcher() {
+      const select = document.getElementById('lang-select');
+      if (!select) return;
+
+      select.addEventListener('change', async function (e) {
+        const selected = e.target.value;
+
+        if (selected === 'en') {
+          window.location.replace('/');
+          return;
+        }
+
+        const res = await fetch('http://localhost:5000/translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ target_lang: 'DE' }),
+        });
+
+        const html = await res.text();
+        document.open();
+        document.write(html);
+        document.close();
+
+        setTimeout(function () {
+          const newSelect = document.getElementById('lang-select');
+          if (newSelect) newSelect.value = 'de';
+          attachSwitcher();
+        }, 100);
+      });
+    }
+
+    attachSwitcher();
+  </script>
 
 </body>
 </html>
