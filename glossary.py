@@ -18,6 +18,9 @@ target_lang   = config["target_lang"]     # "DE"
 # ── 3. BubbleLux brand-specific translation pairs (EN → DE) ──────────────────
 entries = {
     "Bath Bomb":                     "Badebombe",
+    "Rose & Vanilla Dream":          "Rose & Vanilla Dream",
+    "Midnight Lavender":             "Midnight Lavender",
+    "Citrus Burst":                  "Citrus Burst",
     "Add to Cart":                   "In den Warenkorb",
     "More Info":                     "Mehr erfahren",
     "Free returns within 30 days":   "Kostenlose Rücksendung innerhalb von 30 Tagen",
