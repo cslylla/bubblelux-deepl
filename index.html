@@ -11,6 +11,11 @@
 </head>
 <body>
 
+  <div id="lang-loader"
+    style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); background:#ffffff; border:1px solid #FFADAD; border-radius:8px; padding:12px 24px; z-index:9999; font-family:'Inter',sans-serif; font-size:0.95rem; color:#3D3535; box-shadow:0 2px 12px rgba(0,0,0,0.1);">
+    🌍 Translating...
+  </div>
+
   <!-- NAV -->
   <nav id="nav">
     <a href="#" class="nav-logo" id="nav-logo">BubbleLux</a>
@@ -28,7 +33,7 @@
   <section class="hero" id="hero">
     <div class="hero-inner">
       <h1 class="hero-tagline" id="hero-tagline">The purest luxury, dissolved into a moment of bliss.</h1>
-      <p class="hero-body" id="hero-body">BubbleLux was born from a simple belief — that the most ordinary moments deserve extraordinary care. Each bath bomb is handcrafted with pure botanical ingredients, designed to turn your bath into a ritual.</p>
+      <p class="hero-body" id="hero-body">BubbleLux was born from a simple belief, that the most ordinary moments deserve extraordinary care. Each bath bomb is handcrafted with pure botanical ingredients, designed to turn your bath into a ritual.</p>
     </div>
   </section>
 
@@ -130,37 +135,49 @@
 
   <script>
     function attachSwitcher() {
-      const select = document.getElementById('lang-select');
-      if (!select) return;
+        const select = document.getElementById('lang-select');
+        if (!select) return;
 
-      select.addEventListener('change', async function (e) {
-        const selected = e.target.value;
+        select.addEventListener('change', async function (e) {
+          const selected = e.target.value;
 
-        if (selected === 'en') {
-          window.location.replace('/');
-          return;
-        }
+          // Show loader for any language change
+          const loader = document.getElementById('lang-loader');
+          if (loader) loader.style.display = 'flex';
 
-        const res = await fetch('http://localhost:5000/translate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ target_lang: 'DE' }),
+          if (selected === 'en') {
+            window.location.replace('/');
+            return;
+          }
+
+          try {
+            const res = await fetch('http://localhost:5000/translate', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ target_lang: 'DE' }),
+            });
+
+            const html = await res.text();
+            document.open();
+            document.write(html);
+            document.close();
+
+            setTimeout(function () {
+              const loader = document.getElementById('lang-loader');
+              if (loader) loader.style.display = 'none';
+              const newSelect = document.getElementById('lang-select');
+              if (newSelect) newSelect.value = 'de';
+              attachSwitcher();
+            }, 100);
+
+          } catch (err) {
+            if (loader) loader.style.display = 'none';
+            console.error('Translation failed:', err);
+          }
         });
+      }
 
-        const html = await res.text();
-        document.open();
-        document.write(html);
-        document.close();
-
-        setTimeout(function () {
-          const newSelect = document.getElementById('lang-select');
-          if (newSelect) newSelect.value = 'de';
-          attachSwitcher();
-        }, 100);
-      });
-    }
-
-    attachSwitcher();
+      attachSwitcher();
   </script>
 
 </body>

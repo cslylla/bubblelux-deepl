@@ -3,7 +3,9 @@
    ========================================================= */
 
 /* ----- Reset & Base ----- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -15,16 +17,18 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 400;
-  color: #3D3535;
-  background-color: #FDFFB6;
+  color: #3d3535;
+  background-color: #fdffb6;
   line-height: 1.6;
 }
 
 /* ----- Typography ----- */
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
   line-height: 1.25;
 }
 
@@ -38,17 +42,17 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #D9EDF8;
+  background-color: #d9edf8;
   padding: 0 48px;
   height: 68px;
   box-shadow: 0 1px 0 rgba(61, 53, 53, 0.08);
 }
 
 .nav-logo {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 1.6rem;
   font-weight: 700;
-  color: #3D3535;
+  color: #3d3535;
   text-decoration: none;
   letter-spacing: 0.02em;
 }
@@ -64,13 +68,13 @@ h1, h2, h3 {
 }
 
 .lang-select {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: #3D3535;
+  color: #3d3535;
   background-color: rgba(255, 255, 255, 0.55);
-  border: 1.5px solid #3D3535;
+  border: 1.5px solid #3d3535;
   border-radius: 4px;
   padding: 4px 28px 4px 10px;
   appearance: none;
@@ -85,14 +89,14 @@ h1, h2, h3 {
 }
 
 .lang-option-inactive {
-  color: #C4B8B8;
+  color: #c4b8b8;
 }
 
 /* =========================================================
    HERO
    ========================================================= */
 .hero {
-  background-color: #E4F1EE;
+  background-color: #e4f1ee;
   padding: 96px 48px;
   text-align: center;
 }
@@ -105,7 +109,7 @@ h1, h2, h3 {
 .hero-tagline {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: #3D3535;
+  color: #3d3535;
   margin-bottom: 28px;
   line-height: 1.2;
 }
@@ -117,7 +121,7 @@ h1, h2, h3 {
 .hero-body {
   font-size: 1.05rem;
   font-weight: 300;
-  color: #3D3535;
+  color: #3d3535;
   max-width: 620px;
   margin: 0 auto;
   line-height: 1.75;
@@ -129,7 +133,7 @@ h1, h2, h3 {
    ========================================================= */
 .shop {
   padding: 72px 48px 96px;
-  background-color: #FDFFB6;
+  background-color: #fdffb6;
 }
 
 .product-grid {
@@ -144,13 +148,15 @@ h1, h2, h3 {
    CARD
    ========================================================= */
 .card {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 12px rgba(61, 53, 53, 0.07);
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .card:hover {
@@ -164,7 +170,7 @@ h1, h2, h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   padding: 24px 0 16px;
 }
 
@@ -188,22 +194,22 @@ h1, h2, h3 {
 .card-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #3D3535;
+  color: #3d3535;
 }
 
 .card-desc {
   font-size: 0.9rem;
   font-weight: 300;
-  color: #3D3535;
+  color: #3d3535;
   opacity: 0.8;
   line-height: 1.6;
 }
 
 .card-price {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 1.2rem;
   font-weight: 600;
-  color: #3D3535;
+  color: #3d3535;
 }
 
 /* Quantity */
@@ -216,19 +222,19 @@ h1, h2, h3 {
 .qty-label {
   font-size: 0.82rem;
   font-weight: 500;
-  color: #3D3535;
+  color: #3d3535;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .qty-select {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.9rem;
-  color: #3D3535;
-  border: 1.5px solid #DDD8D8;
+  color: #3d3535;
+  border: 1.5px solid #ddd8d8;
   border-radius: 6px;
   padding: 5px 28px 5px 10px;
-  background-color: #FDFFB6;
+  background-color: #fdffb6;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%233D3535' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -238,7 +244,7 @@ h1, h2, h3 {
 
 .qty-select:focus {
   outline: none;
-  border-color: #FFADAD;
+  border-color: #ffadad;
 }
 
 /* Perks list */
@@ -253,7 +259,7 @@ h1, h2, h3 {
 .card-perks li {
   font-size: 0.8rem;
   font-weight: 400;
-  color: #3D3535;
+  color: #3d3535;
   opacity: 0.7;
 }
 
@@ -267,7 +273,7 @@ h1, h2, h3 {
 
 .btn {
   flex: 1;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -275,7 +281,9 @@ h1, h2, h3 {
   border-radius: 8px;
   padding: 10px 12px;
   cursor: pointer;
-  transition: filter 0.15s, transform 0.1s;
+  transition:
+    filter 0.15s,
+    transform 0.1s;
 }
 
 .btn:active {
@@ -283,8 +291,8 @@ h1, h2, h3 {
 }
 
 .btn-cart {
-  background-color: #FFADAD;
-  color: #3D3535;
+  background-color: #ffadad;
+  color: #3d3535;
 }
 
 .btn-cart:hover {
@@ -292,8 +300,8 @@ h1, h2, h3 {
 }
 
 .btn-info {
-  background-color: #FFD6A5;
-  color: #3D3535;
+  background-color: #ffd6a5;
+  color: #3d3535;
 }
 
 .btn-info:hover {
@@ -304,7 +312,7 @@ h1, h2, h3 {
    FOOTER
    ========================================================= */
 .footer {
-  background-color: #DEDAF4;
+  background-color: #dedaf4;
   text-align: center;
   padding: 28px 48px;
 }
@@ -312,7 +320,7 @@ h1, h2, h3 {
 .footer p {
   font-size: 0.85rem;
   font-weight: 400;
-  color: #3D3535;
+  color: #3d3535;
   opacity: 0.75;
 }
 
