@@ -158,9 +158,9 @@
             });
 
             const html = await res.text();
-            document.open();
-            document.write(html);
-            document.close();
+            document.documentElement.innerHTML = html;
+            const billed = res.headers.get('X-Billed-Characters');
+            if (billed) console.log(`DeepL billed characters: ${billed}`);
 
             setTimeout(function () {
               const loader = document.getElementById('lang-loader');

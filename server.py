@@ -72,9 +72,15 @@ def translate():
 
     # Translate the full HTML document via DeepL and return it directly.
     # The caller receives a ready-to-render HTML page — no client-side patching.
-    translated_html = runtime_translate(html_source, target_lang=target_lang)
+    html, billed_chars = runtime_translate(
+        html_source, target_lang=target_lang)
 
-    return Response(translated_html, content_type="text/html; charset=utf-8")
+    print(f"Billed characters: {billed_chars}")
+
+    response = Response(html, mimetype="text/html")
+    response.headers["X-Billed-Characters"] = str(billed_chars)
+    print(repr(html[:200]))
+    return response
 
 
 # ── 3. Start the development server ──────────────────────────────────────────

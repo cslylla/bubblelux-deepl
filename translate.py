@@ -148,7 +148,7 @@ def delta_translate():
 # pages).  In production e-commerce, prefer build-time translation with a
 # cache to avoid per-request latency and unpredictable API costs.
 # ─────────────────────────────────────────────────────────────────────────────
-def runtime_translate(html_string: str, target_lang: str = target_lang) -> str:
+def runtime_translate(html_string: str, target_lang: str = target_lang) -> tuple[str, int]:
     # target_lang defaults to the value in config.yaml ("DE") so that existing
     # calls from translate.py's __main__ block continue to work unchanged.
     # server.py passes the language requested by the client at runtime.
@@ -163,7 +163,7 @@ def runtime_translate(html_string: str, target_lang: str = target_lang) -> str:
         glossary=glossary.glossary_id,
     )
 
-    return result.text
+    return result.text, result.billed_characters
 
 
 # ─────────────────────────────────────────────────────────────────────────────
