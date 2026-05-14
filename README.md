@@ -18,21 +18,21 @@
 
 ```
 bubblelux-deepl/
-├── index.html            # Source page (English)
-├── index.de.html         # Generated German translation (gitignored)
-├── style.css             # Shared stylesheet
+├── .env.example          # Environment variable template
 ├── assets/               # Favicon and product images
+├── config.yaml           # Glossary terms and translation config
 ├── demo.py               # Minimal standalone demo of the HTML handling feature
-├── translate.py          # Build-time and delta translation
-├── server.py             # Flask dev server with runtime translation endpoint
+├── docs/
+│   └── deepl-tms-case-study.pdf  # Case study write-up
 ├── glossary.py           # Creates the DeepL glossary
+├── index.de.html         # Generated German translation (gitignored)
+├── index.html            # Source page (English)
+├── requirements.txt      # Python dependencies
 ├── script.js             # Language switcher logic and runtime translation trigger
 ├── seen_translations.json# Tracks translated content for delta diffing (gitignored)
-├── config.yaml           # Glossary terms and translation config
-├── .env.example          # Environment variable template
-├── requirements.txt      # Python dependencies
-└── docs/
-    └── deepl-tms-case-study.pdf  # Case study write-up
+├── server.py             # Flask dev server with runtime translation endpoint
+├── style.css             # Shared stylesheet
+└── translate.py          # Build-time and delta translation
 ```
 
 ## Setup
