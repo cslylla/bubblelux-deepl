@@ -19,12 +19,10 @@
 
 import json
 import os
-
 import deepl
 import yaml
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-
 from glossary import setup_glossary
 
 # ── 1. Load environment variables from .env ──────────────────────────────────
@@ -35,10 +33,10 @@ api_key = os.getenv("DEEPL_API_KEY")
 with open("config.yaml", "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
-target_lang  = config["target_lang"]   # "DE"
-source_lang  = config["source_lang"]   # "EN"
+target_lang = config["target_lang"]   # "DE"
+source_lang = config["source_lang"]   # "EN"
 tag_handling = config["tag_handling"]  # "html"
-formality    = config["formality"]     # "less"
+formality = config["formality"]     # "less"
 
 # ── 3. Initialise the DeepL client ───────────────────────────────────────────
 client = deepl.DeepLClient(api_key)
@@ -85,15 +83,23 @@ def build_time_translate():
 def delta_translate():
     CACHE_FILE = "seen_translations.json"
 
-    # Parse the HTML and collect every element that carries an id attribute.
+    # Parse the HTML and collect only leaf elements — elements with an id
+    # that do not contain any descendant elements also with an id.
+    # This prevents parent containers from being re-translated when only
+    # a child element changes.
     with open("index.html", "r", encoding="utf-8") as f:
         soup = BeautifulSoup(f, "html.parser")
 
-    current = {
-        tag["id"]: tag.get_text(strip=True)
-        for tag in soup.find_all(id=True)
-        if tag.get_text(strip=True)   # skip empty/structural elements
-    }
+    all_id_elements = soup.find_all(id=True)
+
+    current = {}
+    for tag in all_id_elements:
+        # Skip parent containers — any element whose descendants also have ids
+        if tag.find_all(id=True):
+            continue
+        text = tag.get_text(strip=True)
+        if text:
+            current[tag["id"]] = text
 
     # Load the cache that records what was translated on the previous run.
     with open(CACHE_FILE, "r", encoding="utf-8") as f:

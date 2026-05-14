@@ -79,7 +79,6 @@ def translate():
 
     response = Response(html, mimetype="text/html")
     response.headers["X-Billed-Characters"] = str(billed_chars)
-    print(repr(html[:200]))
     return response
 
 
