@@ -34,6 +34,7 @@ def build_time_translate():
     glossary = setup_glossary()
 
     # Translate the full HTML document in a single API call.
+    # split_sentences="nonewlines": prevents line breaks inside product descriptions from being treated as sentence boundaries.
     result = client.translate_text(
         html_source,
         target_lang=target_lang,
@@ -41,6 +42,7 @@ def build_time_translate():
         tag_handling=tag_handling,
         formality=formality,
         glossary=glossary.glossary_id,
+        split_sentences="nonewlines"
     )
 
     # Write the translated HTML to a new file — ready to deploy

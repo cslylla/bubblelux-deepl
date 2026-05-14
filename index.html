@@ -49,7 +49,7 @@
         </div>
         <div class="card-body">
           <h2 class="card-title" id="card-rose-vanilla-title">Rose &amp; Vanilla Dream</h2>
-          <p class="card-desc" id="card-rose-vanilla-desc">Wrap yourself in a silken veil of delicate florals and sweet, grounding tranquility.</p>
+          <p class="card-desc" id="card-rose-vanilla-desc">Wrap yourself in a silken veil of <strong>delicate florals</strong> and sweet, <em>grounding tranquility</em>.</p>
           <p class="card-price" id="card-rose-vanilla-price">CHF 12.90</p>
           <div class="card-qty">
             <label class="qty-label" for="qty-rose-vanilla" id="card-rose-vanilla-qty-label">Qty</label>
@@ -131,55 +131,10 @@
 
   <!-- FOOTER -->
   <footer class="footer" id="footer">
-    <p id="footer-copy">&copy; 2026 BubbleLux. All rights reserved.</p>
+    <p id="footer-copy">&copy; 2026 BubbleLux. All rights reserved. <a href="/about" id="footer-link">Our story</a></p>
   </footer>
 
-  <script>
-    function attachSwitcher() {
-        const select = document.getElementById('lang-select');
-        if (!select) return;
-
-        select.addEventListener('change', async function (e) {
-          const selected = e.target.value;
-
-          // Show loader for any language change
-          const loader = document.getElementById('lang-loader');
-          if (loader) loader.style.display = 'flex';
-
-          if (selected === 'en') {
-            window.location.replace('/');
-            return;
-          }
-
-          try {
-            const res = await fetch('http://localhost:5000/translate', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ target_lang: 'DE' }),
-            });
-
-            const html = await res.text();
-            document.documentElement.innerHTML = html;
-            const billed = res.headers.get('X-Billed-Characters');
-            if (billed) console.log(`DeepL billed characters: ${billed}`);
-
-            setTimeout(function () {
-              const loader = document.getElementById('lang-loader');
-              if (loader) loader.style.display = 'none';
-              const newSelect = document.getElementById('lang-select');
-              if (newSelect) newSelect.value = 'de';
-              attachSwitcher();
-            }, 100);
-
-          } catch (err) {
-            if (loader) loader.style.display = 'none';
-            console.error('Translation failed:', err);
-          }
-        });
-      }
-
-      attachSwitcher();
-  </script>
+  <script src="/script.js"></script>
 
 </body>
 </html>

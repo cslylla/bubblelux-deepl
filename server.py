@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, Response, jsonify, request, send_from_directory
-
 from translate import runtime_translate
 
 # Load environment variables
@@ -20,10 +19,16 @@ def index():
     return send_from_directory(BASE_DIR, "index.html")
 
 
-# Route: GET /style.css 
+# Route: GET /style.css
 @app.route("/style.css")
 def serve_css():
     return send_from_directory(".", "style.css")
+
+
+# Route: GET /script.js
+@app.route("/script.js")
+def serve_js():
+    return send_from_directory(".", "script.js")
 
 
 # Route: GET /assets/<filename> 
