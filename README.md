@@ -30,7 +30,9 @@ bubblelux-deepl/
 ├── seen_translations.json# Tracks translated content for delta diffing (gitignored)
 ├── config.yaml           # Glossary terms and translation config
 ├── .env.example          # Environment variable template
-└── requirements.txt      # Python dependencies
+├── requirements.txt      # Python dependencies
+└── docs/
+    └── deepl-tms-case-study.pdf  # Case study write-up
 ```
 
 ## Setup
