@@ -3,19 +3,19 @@ import deepl
 import yaml
 from dotenv import load_dotenv
 
-# ── 1. Load environment variables from .env ──────────────────────────────────
+# Load environment variables from .env 
 load_dotenv()
 api_key = os.getenv("DEEPL_API_KEY")
 
-# ── 2. Load project config from config.yaml ──────────────────────────────────
+# Load project config from config.yaml 
 with open("config.yaml", "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
-glossary_name = config["glossary_name"]   # "BubbleLux Glossary"
-source_lang   = config["source_lang"]     # "EN"
-target_lang   = config["target_lang"]     # "DE"
+glossary_name = config["glossary_name"]
+source_lang   = config["source_lang"]
+target_lang   = config["target_lang"]
 
-# ── 3. BubbleLux brand-specific translation pairs (EN → DE) ──────────────────
+# BubbleLux brand-specific translation pairs (EN → DE) 
 entries = {
     "Bath Bomb":                     "Badebombe",
     "Rose & Vanilla Dream":          "Rose & Vanilla Dream",
@@ -34,11 +34,11 @@ entries = {
 def setup_glossary():
     """Create or retrieve the BubbleLux DeepL glossary."""
 
-    # ── 4. Initialise the DeepL client ────────────────────────────────────────
+    # Initialise the DeepL client 
     client = deepl.DeepLClient(api_key)
 
-    # ── 5. Check whether the glossary already exists ─────────────────────────
-    # List all glossaries on the account and look for a name + language match.
+    # Check whether the glossary already exists
+    # List all glossaries
     existing_glossaries = client.list_glossaries()
 
     for glossary in existing_glossaries:
@@ -50,7 +50,7 @@ def setup_glossary():
             print(f"Glossary already exists — ID: {glossary.glossary_id}")
             return glossary
 
-    # ── 6. Glossary not found — create it now ────────────────────────────────
+    # Glossary not found — create it now 
     glossary = client.create_glossary(
         name=glossary_name,
         source_lang=source_lang,
@@ -63,6 +63,6 @@ def setup_glossary():
     return glossary
 
 
-# ── 7. Run directly for the live demo ────────────────────────────────────────
+# Run directly
 if __name__ == "__main__":
     setup_glossary()

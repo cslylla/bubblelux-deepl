@@ -1,22 +1,3 @@
-# translate.py — BubbleLux DeepL Demo
-#
-# Three HTML translation patterns, each suited to a different production scenario:
-#
-#   Pattern 1 — Build-time  (build_time_translate)
-#     Translate the full page once when content is published, write a static
-#     German file, and serve the cached result.  Zero API calls at request time.
-#     Recommended for e-commerce: fast, cost-predictable, glossary-consistent.
-#
-#   Delta      (delta_translate)
-#     Parse the page with BeautifulSoup, compare each element's text against a
-#     local JSON cache, and only translate what has changed.  Ideal for large
-#     product catalogues where most content stays the same between deploys.
-#
-#   Pattern 2 — Runtime     (runtime_translate)
-#     Translate an HTML string on demand, called by the server at request time.
-#     Flexible, but adds latency to every page load.  Shown here for demo
-#     completeness; build-time translation is preferred in production.
-
 import json
 import os
 import deepl
@@ -25,34 +6,31 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from glossary import setup_glossary
 
-# ── 1. Load environment variables from .env ──────────────────────────────────
+# Load environment variables from .env 
 load_dotenv()
 api_key = os.getenv("DEEPL_API_KEY")
 
-# ── 2. Load project config from config.yaml ──────────────────────────────────
+# Load project config from config.yaml 
 with open("config.yaml", "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
-target_lang = config["target_lang"]   # "DE"
-source_lang = config["source_lang"]   # "EN"
-tag_handling = config["tag_handling"]  # "html"
-formality = config["formality"]     # "less"
+target_lang = config["target_lang"]
+source_lang = config["source_lang"]
+tag_handling = config["tag_handling"]
+formality = config["formality"]
 
-# ── 3. Initialise the DeepL client ───────────────────────────────────────────
+# Initialise the DeepL client 
 client = deepl.DeepLClient(api_key)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PATTERN 1 — Build-time translation
-# Translate the whole page once, write a static file, serve that for every
-# German visitor.  One API call per deploy; no latency at request time.
-# ─────────────────────────────────────────────────────────────────────────────
+# Build-time translation
+# Translate the whole page once, write a static file
 def build_time_translate():
-    # Read the source HTML file as a plain string — DeepL handles the markup.
+    # Read the source HTML file as a plain string
     with open("index.html", "r", encoding="utf-8") as f:
         html_source = f.read()
 
-    # Retrieve (or create) the glossary so brand terms are always correct.
+    # Retrieve (or create) the glossary
     glossary = setup_glossary()
 
     # Translate the full HTML document in a single API call.
@@ -65,7 +43,7 @@ def build_time_translate():
         glossary=glossary.glossary_id,
     )
 
-    # Write the translated HTML to a new file — ready to deploy as-is.
+    # Write the translated HTML to a new file — ready to deploy
     with open("index.de.html", "w", encoding="utf-8") as f:
         f.write(result.text)
 
@@ -73,20 +51,12 @@ def build_time_translate():
     print(f"  Output saved to   : index.de.html")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 # DELTA TRANSLATION
-# Parse the page and only translate elements whose text has changed since the
-# last run.  A JSON file acts as a lightweight cache of previously seen text.
-# Perfect for catalogues with thousands of products where only a few lines
-# change with each content update.
-# ─────────────────────────────────────────────────────────────────────────────
+# Parse the page and only translate elements whose text has changed since the last run.
 def delta_translate():
     CACHE_FILE = "seen_translations.json"
 
     # Parse the HTML and collect only leaf elements — elements with an id
-    # that do not contain any descendant elements also with an id.
-    # This prevents parent containers from being re-translated when only
-    # a child element changes.
     with open("index.html", "r", encoding="utf-8") as f:
         soup = BeautifulSoup(f, "html.parser")
 
@@ -94,7 +64,7 @@ def delta_translate():
 
     current = {}
     for tag in all_id_elements:
-        # Skip parent containers — any element whose descendants also have ids
+        # Skip parent containers
         if tag.find_all(id=True):
             continue
         text = tag.get_text(strip=True)
@@ -116,7 +86,7 @@ def delta_translate():
         print("  No changes detected — 0 characters billed")
         return
 
-    # Retrieve the glossary so brand terms stay consistent.
+    # Retrieve the glossary
     glossary = setup_glossary()
 
     total_billed = 0
@@ -133,8 +103,6 @@ def delta_translate():
         total_billed += result.billed_characters
         translated_ids.append(elem_id)
 
-        # Update the cache with the new source text so this element is skipped
-        # on the next run unless its content changes again.
         seen[elem_id] = text
 
     print(f"  Translated IDs    : {', '.join(translated_ids)}")
@@ -147,17 +115,10 @@ def delta_translate():
     print(f"  Cache updated     : {CACHE_FILE}")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PATTERN 2 — Runtime translation
-# Called by server.py with a freshly-rendered HTML string.  Translates on
-# every request — useful when content is fully dynamic (e.g. personalised
-# pages).  In production e-commerce, prefer build-time translation with a
-# cache to avoid per-request latency and unpredictable API costs.
-# ─────────────────────────────────────────────────────────────────────────────
+# Runtime translation
+
 def runtime_translate(html_string: str, target_lang: str = target_lang) -> tuple[str, int]:
-    # target_lang defaults to the value in config.yaml ("DE") so that existing
-    # calls from translate.py's __main__ block continue to work unchanged.
-    # server.py passes the language requested by the client at runtime.
+    
     glossary = setup_glossary()
 
     result = client.translate_text(
@@ -172,9 +133,8 @@ def runtime_translate(html_string: str, target_lang: str = target_lang) -> tuple
     return result.text, result.billed_characters
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# MAIN — run all demo patterns in sequence
-# ─────────────────────────────────────────────────────────────────────────────
+# MAIN
+
 if __name__ == "__main__":
     print("\n── Pattern 1: Build-time translation ───────────────────────────────")
     build_time_translate()
