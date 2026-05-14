@@ -18,12 +18,15 @@
 
 ```
 bubblelux-deepl/
-├── .env.example          # Environment variable template
 ├── assets/               # Favicon and product images
-├── config.yaml           # Glossary terms and translation config
-├── demo.py               # Minimal standalone demo of the HTML handling feature
 ├── docs/
 │   └── deepl-tms-case-study.pdf  # Case study write-up
+├── .env.example          # Environment variable template
+├── .gitignore            # Ignored files from the commit
+├── LICENSE               # License
+├── README.md             # Project information
+├── config.yaml           # Glossary terms and translation config
+├── demo.py               # Minimal standalone demo of the HTML handling feature
 ├── glossary.py           # Creates the DeepL glossary
 ├── index.de.html         # Generated German translation (gitignored)
 ├── index.html            # Source page (English)
