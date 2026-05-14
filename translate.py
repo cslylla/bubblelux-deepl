@@ -6,11 +6,11 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from glossary import setup_glossary
 
-# Load environment variables from .env 
+# Load environment variables from .env
 load_dotenv()
 api_key = os.getenv("DEEPL_API_KEY")
 
-# Load project config from config.yaml 
+# Load project config from config.yaml
 with open("config.yaml", "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
@@ -19,7 +19,7 @@ source_lang = config["source_lang"]
 tag_handling = config["tag_handling"]
 formality = config["formality"]
 
-# Initialise the DeepL client 
+# Initialise the DeepL client
 client = deepl.DeepLClient(api_key)
 
 
@@ -100,7 +100,7 @@ def delta_translate():
             target_lang=target_lang,
             source_lang=source_lang,
             formality=formality,
-            glossary=glossary.glossary_id,
+            glossary=glossary.glossary_id
         )
         total_billed += result.billed_characters
         translated_ids.append(elem_id)
@@ -120,7 +120,7 @@ def delta_translate():
 # Runtime translation
 
 def runtime_translate(html_string: str, target_lang: str = target_lang) -> tuple[str, int]:
-    
+
     glossary = setup_glossary()
 
     result = client.translate_text(
