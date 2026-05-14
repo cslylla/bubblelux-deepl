@@ -22,6 +22,7 @@ bubblelux-deepl/
 ├── index.de.html         # Generated German translation (gitignored)
 ├── style.css             # Shared stylesheet
 ├── assets/               # Favicon and product images
+├── demo.py               # Minimal standalone demo of the HTML handling feature
 ├── translate.py          # Build-time and delta translation
 ├── server.py             # Flask dev server with runtime translation endpoint
 ├── glossary.py           # Creates the DeepL glossary
@@ -48,6 +49,14 @@ python glossary.py
 A free DeepL API key works — 500,000 characters/month. Get one at [deepl.com/pro-api](https://www.deepl.com/pro-api).
 
 ## Running the demo
+
+To see the HTML handling feature in its simplest form, run `demo.py`:
+
+```bash
+python demo.py
+```
+
+It translates a small HTML snippet and prints the result alongside the billed character count.
 
 **Build-time and delta translation:**
 
